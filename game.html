@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامج الحساب الذهني</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+            --shadow-color: #bdc3c7;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .neumorphic {
+            background: var(--background-color);
+            box-shadow: 5px 5px 10px var(--shadow-color),
+                        -5px -5px 10px #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px 0;
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .window {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 500px;
+            background: var(--background-color);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .window-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .window-content {
+            padding: 20px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .number-display {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        button {
+            background: var(--primary-color);
+            color: white;
+            padding: 1px;
+            border-radius: 3px 0 0 0;
+            border: 1pt solid var(--primary-color);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="container mx-auto px-4">
+        <div class="neumorphic">
+           <button><a href="index.html">رجوع</a>
+           </button> 
+            <h1 class="text-2xl font-bold mb-4 text-center">برنامج الحساب الذهني</h1>
+            
+            <div class="mb-4">
+                <h2 class="text-xl font-semibold mb-2">العمليات الحسابية</h2>
+                <div class="flex justify-between">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="add" name="operation" value="add">
+                        <label for="add">+</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="subtract" name="operation" value="subtract">
+                        <label for="subtract">-</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="multiply" name="operation" value="multiply">
+                        <label for="multiply">×</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="divide" name="operation" value="divide">
+                        <label for="divide">÷</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="displayTime" class="block mb-2">وقت العرض (بالثواني)</label>
+                <input type="number" id="displayTime" class="input-field" min="1" value="3">
+            </div>
+
+            <div class="mb-4">
+                <label for="singleDigits" class="block mb-2">عدد الأرقام الآحاد (1-9)</label>
+                <input type="number" id="singleDigits" class="input-field" min="1" max="9" value="5">
+            </div>
+
+            <div class="mb-4">
+                <label for="doubleDigits" class="block mb-2">عدد الأرقام العشرات (10-99)</label>
+                <input type="number" id="doubleDigits" class="input-field" min="1" max="9" value="3">
+            </div>
+
+            <div class="mb-4">
+                <label for="tripleDigits" class="block mb-2">عدد الأرقام المئات (100-999)</label>
+                <input type="number" id="tripleDigits" class="input-field" min="1" max="9" value="2">
+            </div>
+
+            <div class="mb-4">
+                <label for="resultTime" class="block mb-2">وقت إظهار النتيجة (بالثواني)</label>
+                <input type="number" id="resultTime" class="input-field" min="1" value="5">
+            </div>
+
+            <button id="startBtn" class="btn w-full">ابدأ</button>
+        </div>
+    </div>
+
+    <div id="window" class="window">
+        <div class="window-header">
+            <h2>الحساب الذهني</h2>
+            <button class="close-btn" id="closeBtn">&times;</button>
+        </div>
+        <div class="window-content">
+            <div id="numberDisplay" class="number-display"></div>
+            <div id="result" class="text-center text-xl font-bold mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const modalWindow = document.getElementById('window');
+        const closeBtn = document.getElementById('closeBtn');
+        const numberDisplay = document.getElementById('numberDisplay');
+        const result = document.getElementById('result');
+
+        startBtn.addEventListener('click', startGame);
+        closeBtn.addEventListener('click', () => {
+            modalWindow.style.display = 'none';
+        });
+
+        function startGame() {
+            const operations = Array.from(document.querySelectorAll('input[name="operation"]:checked')).map(el => el.value);
+            const displayTime = parseInt(document.getElementById('displayTime').value) * 1000;
+            const singleDigits = parseInt(document.getElementById('singleDigits').value);
+            const doubleDigits = parseInt(document.getElementById('doubleDigits').value);
+            const tripleDigits = parseInt(document.getElementById('tripleDigits').value);
+            const resultTime = parseInt(document.getElementById('resultTime').value) * 1000;
+
+            if (operations.length === 0) {
+                alert('يرجى اختيار عملية حسابية واحدة على الأقل');
+                return;
+            }
+
+            modalWindow.style.display = 'block'; // تأكد من عرض النافذة
+            numberDisplay.textContent = '';
+            result.textContent = '';
+
+            const numbers = generateNumbers(singleDigits, doubleDigits, tripleDigits);
+            let sum = 0;
+
+            function displayNextNumber(index) {
+                if (index >= numbers.length) {
+                    setTimeout(() => {
+                        result.textContent = `المجموع: ${sum}`;
+                    }, resultTime);
+                    return;
+                }
+
+                const number = numbers[index];
+                numberDisplay.textContent = number;
+                numberDisplay.classList.add('fade-in');
+
+                setTimeout(() => {
+                    numberDisplay.classList.remove('fade-in');
+                    
+                    // إضافة العدد إلى المجموع حسب العملية المحددة
+                    if (operations.includes('add')) {
+                        sum += number; // الجمع
+                    }
+                    if (operations.includes('subtract')) {
+                        sum -= number; // الطرح
+                    }
+                    if (operations.includes('multiply')) {
+                        sum *= number; // الضرب (تأكد من إعداد القيمة الأولية بشكل مناسب)
+                    }
+                    if (operations.includes('divide')) {
+                        sum = sum === 0 ? number : sum / number; // القسمة (تجنب القسمة على صفر)
+                    }
+
+                    displayNextNumber(index + 1); // عرض الرقم التالي
+                }, displayTime);
+            }
+
+            displayNextNumber(0); // بدء عرض الأرقام
+        }
+
+        function generateNumbers(singleDigits, doubleDigits, tripleDigits) {
+            const numbers = [];
+            for (let i = 0; i < singleDigits; i++) {
+                numbers.push(Math.floor(Math.random() * 9) + 1); // أرقام من 1 إلى 9
+            }
+            for (let i = 0; i < doubleDigits; i++) {
+                numbers.push(Math.floor(Math.random() * 90) + 10); // أرقام من 10 إلى 99
+            }
+            for (let i = 0; i < tripleDigits; i++) {
+                numbers.push(Math.floor(Math.random() * 900) + 100); // أرقام من 100 إلى 999
+            }
+            return numbers;
+        }
+    </script>
+</body>
+</html>

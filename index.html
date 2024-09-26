@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mymaind</title>
+</head>
+<body>
+    <style>
+        body{
+            background-color: white;
+        }
+        .logo {
+            text-align: center;
+            padding-top: 100px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .start{
+            text-align: center;
+            padding-top: 50px;
+            font-size: 655%;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            transition: all 0.5s ease;
+        }
+        button{
+            padding: 15px 32px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.5s ease;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button::before{
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background-color: #bd1c0e;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        @media only screen and (max-width: 600px) {
+            body{
+                background-color: #f2f2f2;
+            }
+            button{
+                font-size: 18px;
+            }
+        }
+        .fa{
+            font-size: 30px;
+            color: #333;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        @keyframes start-animation {
+            0% {transform: translateY(0);}
+            100% {transform: translateY(-50px);}
+        }
+        @keyframes logo-animation {
+            0% {transform: translateX(0);}
+            100% {transform: translateX(-50px);}
+        }
+        @keyframes start-animation {
+            0% {transform: translateY(0);}
+            100% {transform: translateY(-50px);}
+        } 
+        .about{
+            font-size: 20px;
+            margin-top: 50px;
+
+            font-weight: bold;
+            line-height: 1.5;
+            direction: rtl;
+            text-align: center;
+        }
+        p{
+            margin-bottom: 10px;
+        }
+        a{
+            color: blue;
+            text-decoration: underline;
+        }
+        button{
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+    </style>
+
+
+<div class="logo">
+<p>حساب الذهني</p>
+
+<div class="stert">
+<a href="game.html"><button><i class="fa-sharp fa-solid fa-play"></i> ابدأ</button></a>
+<br>
+<br>
+
+</div>
+</div>
+<div class="about">
+
+    &copy;  جميع الحقوق المحفوظة  - مركز الحاسبة الكترونية - جامعة الانبار 
+       <p>صاحب الفكرة : أ.م.د. عمر عبدالرحمن داود	</p>
+       <p>التنفيذ و العمل : Yassin Taha</p>
+</div>    
+
+
+
+</body>
+</html>
